@@ -59,7 +59,7 @@ labelFechaN.grid(row=2,column=0,sticky="w",padx=5,pady=5)
 #EDad
 labelEdad=tk.Label(frame_pacientes, text="Edad:")
 labelEdad.grid(row=3, column=0, sticky="w", pady=5, padx=5)
-edadentry=tk.Entry(frame_pacientes, state="readonly")
+edadentry=tk.Entry(frame_pacientes,textvariable=edadVar, state="readonly")
 edadentry.grid(row=3, column=1, sticky="w", pady=5, padx=5)
 #genero
 labelGenero=tk.Label(frame_pacientes, text="Genero:")
@@ -103,6 +103,8 @@ treeview=ttk.Treeview(frame_pacientes, columns=("Nombre","Fecha","Edad","Genero"
 validacion_fecha=ventana_principal.register(enmascarar_fecha)
 fechaN=ttk.Entry(frame_pacientes, validate="key", validatecommand=(validacion_fecha,'%P'))
 fechaN.grid(row=2, column=1, sticky="w", pady=5, padx=5)
+
+paciente_data=[]                                                          
 def registrarPaciente():
 #Crear un diccionario con los datos ingresados
     paciente={
@@ -111,11 +113,10 @@ def registrarPaciente():
         "Edad":edadVar.get(),
         "Genero":generoP.get(),
         "Grupo Sanguineo": entrygruposanguineo.get(),
-        "tipo de Seguro":tipo_seguro.get(),
+        "Tipo de Seguro":tipo_seguro.get(),
         "Centro Medico":centromedico.get()    
     }
-    #Agregar paciente a la lista
-    paciente_data=[]
+    #Agregar paciente a la lista                                                         
     paciente_data.append(paciente)
     #Cargar el treeview
     cargar_treeview()
